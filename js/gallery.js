@@ -70,8 +70,10 @@ container.innerHTML = createMarkup(images);
 container.addEventListener("click", handleModalOpen);
 
 function handleModalOpen(event) {
-  if (event.currentTarget === event.target) return;
-
+  event.preventDefault();
+  if (event.target.nodeName !== "IMG") {
+    return;
+  }
   const currentImage = event.target.closest(".gallery-image");
 
   const imageSource = currentImage.dataset.source;
@@ -88,7 +90,6 @@ function handleModalOpen(event) {
               />
             </a>
           </div>
-        
 `);
   instance.show();
 }
